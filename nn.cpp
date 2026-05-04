@@ -1,9 +1,11 @@
+#include <iostream>
+
 struct Matrix{
     float *data;
     int rows, cols;
 
     Matrix(int rows, int cols) : data(new float[rows * cols]) ,rows(rows), cols(cols) {};
-    ~Matrix() { delete[] data };
+    ~Matrix() { delete[] data; };
 };
 
 struct Dataset{
@@ -22,13 +24,13 @@ struct Dataset{
 
     ~Dataset(){
         delete [] images;
-        delete [] data;
+        delete [] labels;
     }
 };
 
 
 int main(){
+    std::cout << "Neural Network\n"; 
 
-
-
+    return 0;
 }
