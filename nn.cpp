@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include "data_loader.hpp"
 
 struct Matrix{
     float *data;
@@ -8,29 +10,24 @@ struct Matrix{
     ~Matrix() { delete[] data; };
 };
 
-struct Dataset{
-    float *images;
-    int *labels, num_samples, height, width, num_classes;
-
-    Dataset(int height, int width, int num_classes, int num_samples) :
-        images(new float[height * width * num_samples]),
-        labels(new int[num_samples]),
-        num_samples(num_samples), 
-        height(height),
-        width(width),
-        num_classes(num_classes) 
-    {}
-
-
-    ~Dataset(){
-        delete [] images;
-        delete [] labels;
-    }
-};
-
-
-int main(){
+int main(int argc, char *argv[]){
     std::cout << "Neural Network\n"; 
+
+    if(argc < 3){
+        std::cerr << "Usage: " << argv[0] << " <images_file> <labels_file>\n";
+        return 1;
+    }
+
+    std::string image_file_path = argv[1];
+    std::string label_file_path = argv[2];
+   
+    Dataset dataset = load_images(image_file_path, 10);
+    load_labels(label_file_path, &dataset);
+
+
+
+    
 
     return 0;
 }
+
