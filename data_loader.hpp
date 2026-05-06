@@ -48,9 +48,9 @@ Dataset load_images(const std::string& image_file_path, int num_classes){
     /* IMAGE_MAGIC determines if the IDX file contains files */
     if(magic != IMAGE_MAGIC) throw std::runtime_error("Invalid MNIST/EMNIST image file");
     
-    uint32_t num_images = static_cast<int>(read_u32_line(file));
-    uint32_t height = static_cast<int>(read_u32_line(file));
-    uint32_t width = static_cast<int>(read_u32_line(file));
+    int num_images = static_cast<int>(read_u32_line(file));
+    int height = static_cast<int>(read_u32_line(file));
+    int width = static_cast<int>(read_u32_line(file));
     int image_size = height * width;
 
     Dataset dataset(height, width, num_classes, num_images);
@@ -88,7 +88,7 @@ void load_labels(const std::string& label_file_path, Dataset* dataset){
         uint8_t label;
         file.read((char *)(&label), 1);
         if(!file) 
-            throw std::runtime_error("Failed to read label at index: " + i);
+            throw std::runtime_error("Failed to read label at index: " + std::to_string(i));
         dataset->labels[i] = static_cast<int>(label);
     }
 }
