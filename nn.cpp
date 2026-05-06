@@ -6,7 +6,7 @@ struct Matrix{
     float *data;
     int rows, cols;
 
-    Matrix(int rows, int cols) : data(new float[rows * cols]) ,rows(rows), cols(cols) {};
+    Matrix(int rows_, int cols_) : data(new float[rows_ * cols_]) ,rows(rows_), cols(cols_) {};
     ~Matrix() { delete[] data; };
 };
 

@@ -12,15 +12,16 @@
 
 struct Dataset{
     float *images;
-    int *labels, num_samples, height, width, num_classes;
+    uint8_t *labels;
+    int num_samples, height, width, num_classes;
 
-    Dataset(int height, int width, int num_classes, int num_samples) :
-        images(new float[height * width * num_samples]),
-        labels(new int[num_samples]),
-        num_samples(num_samples), 
-        height(height),
-        width(width),
-        num_classes(num_classes) 
+    Dataset(int height_, int width_, int num_classes_, int num_samples_) :
+        images(new float[height_ * width_ * num_samples_]),
+        labels(new uint8_t[num_samples_]),
+        num_samples(num_samples_), 
+        height(height_),
+        width(width_),
+        num_classes(num_classes_) 
     {}
 
 
@@ -83,12 +84,12 @@ inline void load_labels(const std::string& label_file_path, Dataset* dataset){
     if(magic != LABEL_MAGIC) 
         throw std::runtime_error("Invalid MNIST/EMNIST label file");
 
-    uint32_t num_labels = read_u32_line(file);
+    uint8_t num_labels = static_cast<uint8_t>(read_u32_line(file));
     
     if(num_labels != dataset->num_samples) 
         throw std::runtime_error("Number of labels don't match number of images");
 
-    for(int i = 0; i < num_labels; i++){
+    for(uint8_t i = 0; i < num_labels; i++){
         uint8_t label;
         file.read(reinterpret_cast<char *>(&label), 1);
         if(!file) 
