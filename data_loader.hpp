@@ -6,29 +6,25 @@
 #include <fstream>
 #include <stdexcept>
 #include <string>
+#include <vector>
 
 #define IMAGE_MAGIC 2051
 #define LABEL_MAGIC 2049
 
 struct Dataset{
-    float *images;
-    uint8_t *labels;
-    int num_samples, height, width, num_classes;
+    std::vector<float> images;
+    std::vector<uint8_t> labels;
 
-    Dataset(int height_, int width_, int num_classes_, int num_samples_) :
-        images(new float[height_ * width_ * num_samples_]),
-        labels(new uint8_t[num_samples_]),
+    unsigned int num_samples, height, width, num_classes;
+
+    Dataset(unsigned int height_, unsigned int width_, unsigned int num_classes_, unsigned int num_samples_) :
+        images(height_ * width_ * num_samples_),
+        labels(num_samples_),
         num_samples(num_samples_), 
         height(height_),
         width(width_),
         num_classes(num_classes_) 
     {}
-
-
-    ~Dataset(){
-        delete [] images;
-        delete [] labels;
-    }
 };
 
 inline uint32_t read_u32_line(std::ifstream& file){
@@ -60,7 +56,7 @@ inline Dataset load_images(const std::string& image_file_path, int num_classes){
 
     Dataset dataset(height, width, num_classes, num_images);
 
-    for(int image = 0; image < dataset.num_samples; image++){
+    for(unsigned int image = 0; image < dataset.num_samples; image++){
         for(int pixel = 0; pixel < image_size; pixel++){
             uint8_t pixel_val;
             file.read((char*)(&pixel_val), 1);
