@@ -1,5 +1,6 @@
 #ifndef DATA_LOADER_HPP
 #define DATA_LOADER_HPP
+
 #include <iostream>
 #include <cstdint>
 #include <fstream>
@@ -34,7 +35,8 @@ inline uint32_t read_u32_line(std::ifstream& file){
 
     file.read(reinterpret_cast<char *>(bytes), 4);
 
-    if(!file) throw std::runtime_error("Failed to read 4 bytes\n");
+    if(!file) 
+        throw std::runtime_error("Failed to read 4 bytes\n");
 
     /* combined all 4 bytes into one using big endian order*/
     return (uint32_t(bytes[0]) << 24) | (uint32_t(bytes[1]) << 16) | (uint32_t(bytes[2]) << 8) | uint32_t(bytes[3]);
