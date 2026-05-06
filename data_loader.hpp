@@ -27,7 +27,7 @@ struct Dataset{
     }
 };
 
-uint32_t read_u32_line(std::ifstream& file){
+inline uint32_t read_u32_line(std::ifstream& file){
     uint8_t bytes[4]; 
 
     file.read(reinterpret_cast<char *>(bytes), 4);
@@ -38,7 +38,7 @@ uint32_t read_u32_line(std::ifstream& file){
     return (uint32_t(bytes[0]) << 24) | (uint32_t(bytes[1]) << 16) | (uint32_t(bytes[2]) << 8) | uint32_t(bytes[3]);
 }
 
-Dataset load_images(const std::string& image_file_path, int num_classes){
+inline Dataset load_images(const std::string& image_file_path, int num_classes){
     std::ifstream file(image_file_path, std::ios::binary);
     if(!file) 
         throw std::runtime_error("Failed to open image file: " + image_file_path);
@@ -70,7 +70,7 @@ Dataset load_images(const std::string& image_file_path, int num_classes){
     return dataset;
 }
 
-void load_labels(const std::string& label_file_path, Dataset* dataset){
+inline void load_labels(const std::string& label_file_path, Dataset* dataset){
     std::ifstream file(label_file_path, std::ios::binary);
     if(!file) 
         throw std::runtime_error("Failed to open label file: " + label_file_path);
