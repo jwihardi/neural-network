@@ -13,7 +13,7 @@ struct Matrix{
 int main(int argc, char *argv[]){
     std::cout << "Neural Network\n"; 
 
-    if(argc < 3){
+    if(argc < 4){
         std::cerr << "Usage: " << argv[0] << " <images_file> <labels_file>\n";
         return 1;
     }
