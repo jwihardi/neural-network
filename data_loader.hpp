@@ -3,6 +3,8 @@
 #include <iostream>
 #include <cstdint>
 #include <fstream>
+#include <stdexcept>
+#include <string>
 
 #define IMAGE_MAGIC 2051
 #define LABEL_MAGIC 2049
