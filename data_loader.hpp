@@ -88,7 +88,7 @@ inline void load_labels(const std::string& label_file_path, Dataset* dataset){
 
     for(int i = 0; i < num_labels; i++){
         uint8_t label;
-        file.read((char *)(&label), 1);
+        file.read(reinterpret_cast<char *>(&label), 1);
         if(!file) 
             throw std::runtime_error("Failed to read label at index: " + std::to_string(i));
         dataset->labels[i] = static_cast<int>(label);
