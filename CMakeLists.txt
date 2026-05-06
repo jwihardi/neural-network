@@ -1,9 +1,25 @@
 cmake_minimum_required(VERSION 3.16) # idk what version to put
 
 project(neural_network LANGUAGES CXX)
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 
 add_executable(nn
     nn.cpp
 )
+
+target_compile_features(nn PRIVATE cxx_std_20)
+target_compile_options(nn PRIVATE
+    -Wall
+    -Wextra
+    -Wpedantic
+    -Wconversion
+    -Wshadow
+    -Wnull-dereference
+    -Wdouble-promotion
+    -Wformat=2
+
+    -O2
+    -pipe
+    -march=native
+)
+
