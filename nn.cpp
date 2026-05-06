@@ -20,8 +20,9 @@ int main(int argc, char *argv[]){
 
     std::string image_file_path = argv[1];
     std::string label_file_path = argv[2];
+    int num_labels = std::stoi(argv[3]);
    
-    Dataset dataset = load_images(image_file_path, 10);
+    Dataset dataset = load_images(image_file_path, num_labels);
     load_labels(label_file_path, &dataset);
 
 
