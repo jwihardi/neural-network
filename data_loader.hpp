@@ -25,7 +25,7 @@ struct Dataset{
         width(width_),
         num_classes(num_classes_) 
     {}
-};
+}
 
 inline uint32_t read_u32_line(std::ifstream& file){
     uint8_t bytes[4]; 

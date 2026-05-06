@@ -2,14 +2,6 @@
 #include <string>
 #include "data_loader.hpp"
 
-struct Matrix{
-    float *data;
-    int rows, cols;
-
-    Matrix(int rows_, int cols_) : data(new float[rows_ * cols_]) ,rows(rows_), cols(cols_) {};
-    ~Matrix() { delete[] data; };
-};
-
 int main(int argc, char *argv[]){
     std::cout << "Neural Network\n"; 
 
