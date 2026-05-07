@@ -3,6 +3,7 @@
 #include "data_loader.hpp"
 #include "matrix.hpp"
 #include "activations.hpp"
+#include "losses.hpp"
 
 int main(int argc, char *argv[]){
     std::cout << "Neural Network\n"; 
