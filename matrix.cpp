@@ -75,10 +75,10 @@ int Matrix::argmax() const{
     int best_idx = 0;
     float best_val = data[0];
 
-    for(std::size_t i; i < data.size(); i++){
+    for(std::size_t i = 0; i < data.size(); i++){
         if(data[i] <= best_val) continue;
         best_val = data[i];
-        best_idx = i;
+        best_idx = static_cast<int>(i);
     }
     return best_idx;
 }
