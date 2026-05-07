@@ -10,14 +10,16 @@ void train(const Dataset&, Matrix&, Matrix&, int, float);
 int main(int argc, char *argv[]){
     std::cout << "Neural Network\n"; 
 
-    if(argc < 4){
+    if(argc < 5){
         std::cerr << "Usage: " << argv[0] << " <images_file> <labels_file>\n";
         return 1;
     }
 
     std::string image_file_path = argv[1];
     std::string label_file_path = argv[2];
-    int num_labels = std::stoi(argv[3]);
+    int epochs = std::stoi(argv[3]);
+    float learning_rate = std::stof(argv[4]);
+    int num_labels = std::stoi(argv[5]);
 
     Dataset dataset = load_images(image_file_path, num_labels);
     load_labels(label_file_path, &dataset);
@@ -29,7 +31,7 @@ int main(int argc, char *argv[]){
     Matrix weights = Matrix::init_rand_mat(dataset.num_classes, dataset.height * dataset.width, rand, -0.1f, 0.1f);
     Matrix bias(dataset.num_classes, 1);
 
-    train(dataset, weights, bias, 5, 0.001f);
+    train(dataset, weights, bias, epochs, 0.001f);
 
 
     return 0;

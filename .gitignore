@@ -1,6 +1,7 @@
 mnist/
 MNIST/
 nn
+neural_network
 build/
 CMakeFiles/
 Makefile
