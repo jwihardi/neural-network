@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 3.16) # idk what version to put
 project(neural_network LANGUAGES CXX)
 
 
-add_executable(nn
-    nn.cpp
+add_executable(neural_network
+    neural_network.cpp
     matrix.cpp
 )
 
