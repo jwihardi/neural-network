@@ -2,6 +2,7 @@
 #include <string>
 #include "data_loader.hpp"
 #include "matrix.hpp"
+#include "activations.hpp"
 
 int main(int argc, char *argv[]){
     std::cout << "Neural Network\n"; 
@@ -27,14 +28,12 @@ int main(int argc, char *argv[]){
 
     Matrix x = Matrix::load_image_mat(dataset, 0, batch_size);
 
-    Matrix scores = weights.multiply(x);
-    scores.add(bias);
+    Matrix logits = weights.multiply(x);
+    logits.add(bias);
 
-    int prediction = scores.argmax();
-    int observed = dataset.labels[0];
+    Matrix a = Activations::softmax(logits); // a = activation(z) where z = logits
 
-    std::cout << "Prediction: " << prediction << "\n";
-    std::cout << "Observed: " << observed << "\n";
+
 
     return 0;
 }
