@@ -8,8 +8,8 @@ add_executable(neural_network
     matrix.cpp
 )
 
-target_compile_features(nn PRIVATE cxx_std_20)
-target_compile_options(nn PRIVATE
+target_compile_features(neural_network PRIVATE cxx_std_20)
+target_compile_options(neural_network PRIVATE
     -Wall
     -Wextra
     -Wpedantic
