@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "data_loader.hpp"
+#include "matrix.hpp"
 
 int main(int argc, char *argv[]){
     std::cout << "Neural Network\n"; 

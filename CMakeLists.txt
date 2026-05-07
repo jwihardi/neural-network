@@ -5,6 +5,7 @@ project(neural_network LANGUAGES CXX)
 
 add_executable(nn
     nn.cpp
+    matrix.cpp
 )
 
 target_compile_features(nn PRIVATE cxx_std_20)
