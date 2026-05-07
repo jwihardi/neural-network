@@ -1,5 +1,6 @@
 #include <stdexcept>
 #include <random>
+#include <cstddef>
 #include "matrix.hpp"
 #include "data_loader.hpp"
 
@@ -48,7 +49,7 @@ Matrix Matrix::init_rand_mat(int rows_, int cols_, std::mt19937& rand, float min
 
     std::uniform_real_distribution<float> dist(min_val, max_val);
 
-    for(int i = 0; i < rows * cols; i++)
+    for(std::size_t i = 0; i < matrix.data.size(); i++)
         matrix.data[i] = dist(rand);
 
     return matrix;
