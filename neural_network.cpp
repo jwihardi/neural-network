@@ -31,7 +31,7 @@ int main(int argc, char *argv[]){
     Matrix weights = Matrix::init_rand_mat(dataset.num_classes, dataset.height * dataset.width, rand, -0.1f, 0.1f);
     Matrix bias(dataset.num_classes, 1);
 
-    train(dataset, weights, bias, epochs, 0.001f);
+    train(dataset, weights, bias, epochs, learning_rate);
 
 
     return 0;

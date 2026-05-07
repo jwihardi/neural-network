@@ -8,8 +8,8 @@
 #include <string>
 #include <vector>
 
-#define IMAGE_MAGIC 2051
-#define LABEL_MAGIC 2049
+static constexpr int IMAGE_MAGIC = 2051;
+static constexpr int LABEL_MAGIC = 2049;
 
 struct Dataset{
     std::vector<float> images;
