@@ -71,3 +71,14 @@ Matrix Matrix::load_image_mat(const Dataset& dataset, int start_idx, int batch_s
     return x;
 }
 
+int Matrix::argmax() const{
+    int best_idx = 0;
+    float best_val = data[0];
+
+    for(std::size_t i; i < data.size(); i++){
+        if(data[i] <= best_val) continue;
+        best_val = data[i];
+        best_idx = i;
+    }
+    return best_idx;
+}
