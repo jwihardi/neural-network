@@ -8,14 +8,15 @@ struct Matrix{
     int rows, cols;
 
     Matrix(int, int);
-    
+
     Matrix multiply(const Matrix&) const;
 
     Matrix transpose() const;
 
     void add(const Matrix&);
 
-    Matrix init_weights(int, int, int);
+    Matrix init_rand_mat(int, int, float, float, int);
+    
 };
 
 #endif

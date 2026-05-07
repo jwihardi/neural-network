@@ -2,8 +2,8 @@
 #include <random>
 #include "matrix.hpp"
 
-Matrix::Matrix(int rows_, int cols_) : data(rows_ * cols_) ,rows(rows_), cols(cols_) {}
-    
+Matrix::Matrix(int rows_, int cols_) : data(rows_ * cols_), rows(rows_), cols(cols_) {}
+
 Matrix Matrix::multiply(const Matrix& other) const{
     if(cols != other.rows) 
         throw std::runtime_error("Invalid dimensions for matrix multiplication");
@@ -42,16 +42,21 @@ void Matrix::add(const Matrix& other){
     }
 }
 
-Matrix Matrix::init_weights(int rows_, int cols_, int seed=0){
-    Matrix w(rows_, cols_);
+Matrix Matrix::init_rand_mat(int rows_, int cols_, float lower=-0.01f, float upper=0.01f, int seed=0){
+    Matrix matrix(rows_, cols_);
 
     std::mt19937 rng(seed); // what a function name TT
-    std::uniform_real_distribution<float> dist(-0.01f, 0.01f);
+    std::uniform_real_distribution<float> dist(lower, upper);
 
     for(int i = 0; i < rows; i++){
-        for(int u = 0; u < cols; u++){
-            w.data[i*cols + u] = dist(rng);
+        for(int u = 0; u < cols; u++){ // for biases not sure performance of an iteration of 1
+            matrix.data[i*cols + u] = dist(rng);
         }
     }
-    return w;
+    return matrix;
 }
+
+
+
+
+
