@@ -27,6 +27,23 @@ struct Activations{
         return res;
     }
 
+    inline static Matrix relu(const Matrix& mat){
+        Matrix res(mat.rows, mat.cols);
+        
+        for(std::size_t i = 0; i < mat.data.size(); i++)
+            res.data[i] = std::max(0.0f, mat.data[i]);
+        
+        return res;
+    }
+
+    inline static Matrix relu_derivative(const Matrix& mat){
+        Matrix res(mat.rows, mat.cols);
+
+        for(std::size_t i = 0; i < mat.data.size(); i++)
+            res.data[i] = (mat.data[i] > 0.0f) ? 1.0f : 0.0f;
+            
+        return res;
+    }
 
 };
 
