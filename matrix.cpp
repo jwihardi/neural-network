@@ -82,3 +82,18 @@ int Matrix::argmax() const{
     }
     return best_idx;
 }
+
+void Matrix::subtract_one_hot(int label){
+    data[label] -= 1.0f;
+}
+
+void Matrix::scale(float scale){
+    for(float& val : data)
+        val *= scale;
+}
+
+void Matrix::subtract_scaled(const Matrix& mat, float scale){
+    Matrix tmp = mat;
+    tmp.scale(-scale);
+    add(tmp);
+}

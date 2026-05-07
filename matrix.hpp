@@ -23,6 +23,11 @@ struct Matrix{
 
     int argmax() const;
     
+    void subtract_one_hot(int);
+
+    void scale(float);
+
+    void subtract_scaled(const Matrix&, float);
 };
 
 #endif

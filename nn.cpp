@@ -5,6 +5,8 @@
 #include "activations.hpp"
 #include "losses.hpp"
 
+void train(const Dataset&, Matrix&, Matrix&, int, float);
+
 int main(int argc, char *argv[]){
     std::cout << "Neural Network\n"; 
 
@@ -27,15 +29,46 @@ int main(int argc, char *argv[]){
     Matrix weights = Matrix::init_rand_mat(dataset.num_classes, dataset.height * dataset.width, rand, -0.1f, 0.1f);
     Matrix bias(dataset.num_classes, 1);
 
-    Matrix x = Matrix::load_image_mat(dataset, 0, batch_size);
-
-    Matrix logits = weights.multiply(x);
-    logits.add(bias);
-
-    Matrix a = Activations::softmax(logits); // a = activation(z) where z = logits
-
+    train(dataset, weights, bias, 5, 0.001f);
 
 
     return 0;
+}
+
+void train(const Dataset& dataset, Matrix& weights, Matrix& bias, int epochs, float learning_rate){
+    for(int epoch = 0; epoch < epochs; epoch++){
+        float tot_loss = 0.0f;
+        int correct = 0;
+
+        for(unsigned int sample = 0; sample < dataset.num_samples; sample++){
+            Matrix x = Matrix::load_image_mat(dataset, sample, 1); // batch size 1 for now
+            
+            Matrix z = weights.multiply(x);
+            z.add(bias);
+
+            Matrix predictions = Activations::softmax(z);
+
+            int actual = dataset.labels[sample];
+            int prediction = predictions.argmax();
+
+            if(prediction == actual)
+                correct++;
+
+            tot_loss += Losses::cross_entropy(predictions, actual);
+
+            /*      Backpropagation     */
+            /* dz = y_hat - hot(actual) i.e. [2, 3, 2.2] - [0, 0, 1] */ 
+            predictions.subtract_one_hot(actual);
+
+            /* dW = dz * transpose(x) = db */
+            Matrix dW = predictions.multiply(x.transpose());
+            
+            weights.subtract_scaled(dW, learning_rate);
+            bias.subtract_scaled(predictions, learning_rate);
+        }
+        float avg_loss = tot_loss / static_cast<float>(dataset.num_samples);
+        float accuracy = static_cast<float>(correct) / static_cast<float>(dataset.num_samples);
+        std::cout << "Epoch: " << epoch + 1 << " | loss: " << avg_loss << " | accuracy: " << accuracy << "\n";
+    }
 }
 
