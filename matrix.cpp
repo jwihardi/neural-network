@@ -30,3 +30,13 @@ Matrix Matrix::transpose() const{
     }
     return res;
 }
+
+void Matrix::add(const Matrix& other){
+    if(rows != other.rows || cols != other.cols)
+        throw std::runtime_error("Invalid dimensions for matrix addition");
+
+    for(int i = 0; i < rows; i++){
+        for(int u = 0; u < cols; u++)
+            data[i * cols + u] += other.data[i * cols + u];
+    }
+}

@@ -12,6 +12,8 @@ struct Matrix{
     Matrix multiply(const Matrix&) const;
 
     Matrix transpose() const;
+
+    void add(const Matrix&);
 };
 
 #endif
