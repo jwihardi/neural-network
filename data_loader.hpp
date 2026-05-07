@@ -80,7 +80,7 @@ inline void load_labels(const std::string& label_file_path, Dataset* dataset){
     if(magic != LABEL_MAGIC) 
         throw std::runtime_error("Invalid MNIST/EMNIST label file");
 
-    uint8_t num_labels = read_u32_line(file);
+    uint32_t num_labels = read_u32_line(file);
     
     if(num_labels != dataset->num_samples) 
         throw std::runtime_error("Number of labels don't match number of images");
