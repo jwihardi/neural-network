@@ -17,9 +17,9 @@ struct Matrix{
 
     void add(const Matrix&);
 
-    Matrix init_rand_mat(int, int, std::mt19937&, float, float);
+    static Matrix init_rand_mat(int, int, std::mt19937&, float, float);
 
-    Matrix load_image_mat(const Dataset&, int, int);
+    static Matrix load_image_mat(const Dataset&, int, int);
 
     int argmax() const;
     

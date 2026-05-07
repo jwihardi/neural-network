@@ -85,7 +85,7 @@ inline void load_labels(const std::string& label_file_path, Dataset* dataset){
     if(num_labels != dataset->num_samples) 
         throw std::runtime_error("Number of labels don't match number of images");
 
-    for(uint8_t i = 0; i < num_labels; i++){
+    for(uint32_t i = 0; i < num_labels; i++){
         uint8_t label;
         file.read(reinterpret_cast<char *>(&label), 1);
         if(!file) 
