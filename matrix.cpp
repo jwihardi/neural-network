@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <random>
 #include "matrix.hpp"
 
 Matrix::Matrix(int rows_, int cols_) : data(rows_ * cols_) ,rows(rows_), cols(cols_) {}
@@ -39,4 +40,18 @@ void Matrix::add(const Matrix& other){
         for(int u = 0; u < cols; u++)
             data[i * cols + u] += other.data[i * cols + u];
     }
+}
+
+Matrix Matrix::init_weights(int rows_, int cols_, int seed=0){
+    Matrix w(rows_, cols_);
+
+    std::mt19937 rng(seed); // what a function name TT
+    std::uniform_real_distribution<float> dist(-0.01f, 0.01f);
+
+    for(int i = 0; i < rows; i++){
+        for(int u = 0; u < cols; u++){
+            w.data[i*cols + u] = dist(rng);
+        }
+    }
+    return w;
 }

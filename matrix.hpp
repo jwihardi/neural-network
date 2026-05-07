@@ -14,6 +14,8 @@ struct Matrix{
     Matrix transpose() const;
 
     void add(const Matrix&);
+
+    Matrix init_weights(int, int, int);
 };
 
 #endif
