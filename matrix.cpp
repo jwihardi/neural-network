@@ -1,6 +1,7 @@
 #include <stdexcept>
 #include <random>
 #include "matrix.hpp"
+#include "data_loader.hpp"
 
 Matrix::Matrix(int rows_, int cols_) : data(rows_ * cols_), rows(rows_), cols(cols_) {}
 
@@ -42,21 +43,30 @@ void Matrix::add(const Matrix& other){
     }
 }
 
-Matrix Matrix::init_rand_mat(int rows_, int cols_, float lower=-0.01f, float upper=0.01f, int seed=0){
+Matrix Matrix::init_rand_mat(int rows_, int cols_, std::mt19937& rand, float min_val, float max_val){
     Matrix matrix(rows_, cols_);
 
-    std::mt19937 rng(seed); // what a function name TT
-    std::uniform_real_distribution<float> dist(lower, upper);
+    std::uniform_real_distribution<float> dist(min_val, max_val);
 
-    for(int i = 0; i < rows; i++){
-        for(int u = 0; u < cols; u++){ // for biases not sure performance of an iteration of 1
-            matrix.data[i*cols + u] = dist(rng);
-        }
-    }
+    for(int i = 0; i < rows * cols; i++)
+        matrix.data[i] = dist(rand);
+
     return matrix;
 }
 
+Matrix Matrix::load_image_mat(const Dataset& dataset, int start_idx, int batch_size){
+    int image_size = dataset.height * dataset.width;
 
+    Matrix x(image_size, batch_size); 
 
+    for(int b = 0; b < batch_size; b++){
+        int curr_image_idx = start_idx + b;
 
+        for(int pixel = 0; pixel < image_size; pixel++){
+            x.data[pixel * x.cols + b] = dataset.images[image_size * curr_image_idx + pixel];
+        }
+    }
+    
+    return x;
+}
 
