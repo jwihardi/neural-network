@@ -1,5 +1,4 @@
-#ifndef ACTIVATION_HPP
-#define ACTIVATION_HPP
+#pragma once
 
 #include "matrix.hpp"
 
@@ -46,8 +45,3 @@ struct Activations{
     }
 
 };
-
-
-
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef DATA_LOADER_HPP
-#define DATA_LOADER_HPP
+#pragma once 
 
 #include <iostream>
 #include <cstdint>
@@ -94,4 +93,3 @@ inline void load_labels(const std::string& label_file_path, Dataset* dataset){
     }
 }
 
-#endif

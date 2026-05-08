@@ -67,7 +67,6 @@ Matrix Matrix::load_image_mat(const Dataset& dataset, int start_idx, int batch_s
             x.data[pixel * x.cols + b] = dataset.images[image_size * curr_image_idx + pixel];
         }
     }
-    
     return x;
 }
 

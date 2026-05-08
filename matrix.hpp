@@ -1,5 +1,4 @@
-#ifndef MATRIX_HPP
-#define MATRIX_HPP
+#pragma once
 
 #include <vector>
 #include <random>
@@ -29,5 +28,3 @@ struct Matrix{
 
     void subtract_scaled(const Matrix&, float);
 };
-
-#endif
